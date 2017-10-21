@@ -247,16 +247,15 @@ public class Value {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("(" + row + ", " + col + ")\n[\n");
+		sb.append("(" + row + ", " + col + ")\n");
 		for (int i = 0; i < row; i++) {
 			sb.append("[");
 			for (int j = 0; j < col; j++) {
-				sb.append(Double.toString(M[i][j]));
+				sb.append(String.format("%.2f", M[i][j]));
 				sb.append(" ");
 			}
 			sb.append("]\n");
 		}
-		sb.append("]\n");
 		return sb.toString();
 	}
 

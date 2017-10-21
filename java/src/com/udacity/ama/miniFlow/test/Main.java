@@ -69,8 +69,8 @@ public class Main {
 		X.value = X_.slice(0, 10);
 		y.value = y_.slice(0, 10);
 		Graph.forward(sortedNodes);
-		Value a = sortedNodes.get(sortedNodes.size()-2).value;
-		System.out.println("Calculate result " + a.toString());
-		System.out.println("Expected result " + y.value.toString());
+		Value a = sortedNodes.get(sortedNodes.size()-2).value; // a is l2 output value
+		System.out.println("Calculate result " + a.T().toString());
+		System.out.println("Expected result " + y.value.T().toString());
 	}
 }
