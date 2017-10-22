@@ -24,10 +24,10 @@ public class Main {
 		Input b2 = new Input(b2_, "b2");
 	
 		// Structure of the neural network
- 		Node linear1 = new Linear(X, W1, b1, "l1");
-		Node sigmoid = new Sigmoid(linear1, "s1");
-		Node linear2 = new Linear(sigmoid, W2, b2, "l2");
-		Node cost = new MSE(y, linear2, "cost");
+ 		Node Linear1 = new Linear(X, W1, b1, "l1");
+		Node Sigmoid = new Sigmoid(Linear1, "s1");
+		Node Linear2 = new Linear(Sigmoid, W2, b2, "l2");
+		Node cost = new MSE(y, Linear2, "cost");
 
 		Node[] inputNodes = new Node[] {X, y, W1, b1, W2, b2};
 		List<Node> sortedNodes = Graph.topologicalSort(inputNodes);
