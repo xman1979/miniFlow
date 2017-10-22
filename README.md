@@ -174,4 +174,6 @@ Calculate result (1, 10)
 Expected result (1, 10)
 [24.00 21.60 34.70 33.40 36.20 28.70 22.90 27.10 16.50 18.90 ]
 ```
+Pretty close, right? :)
 
+I hope this little project helps more people to understand neural network. 
