@@ -1,0 +1,12 @@
+digraph forward11 {
+  "Input X (11, 13)" -> "Linear1 (11, 10)"
+  "Input W1 (13, 10)" -> "Linear1 (11, 10)"
+  "Input b1 (1, 10)" -> "Linear1 (11, 10)"
+  "Linear1 (11, 10)" -> "Sigmoid (11, 10)"
+  "Sigmoid (11, 10)" -> "Linear2 (11, 1)"
+  "Input W2 (10, 1)" -> "Linear2 (11, 1)"
+  "Input b2 (1, 1)" -> "Linear2 (11, 1)"
+  "Linear2 (11, 1)" -> "MSE (1, 1)"
+  "Input y (11, 1)" -> "MSE (1, 1)"
+  "MSE (1, 1)" -> "cost"
+}
