@@ -10,8 +10,6 @@ public class Main {
 		int numSamples = BostonData.SAMPLES;
 		int numHidden = 10;
 
-		Value X_ = new Value(BostonData.instance.DATA).normalizeColumn();
-		Value y_ = new Value(BostonData.instance.TARGET).T();
 		Value W1_ = new Value(numFeatures, numHidden).random();
 		Value b1_ = new Value(1, numHidden).zero();
 		Value W2_ = new Value(numHidden, 1).random();
@@ -26,26 +24,27 @@ public class Main {
 		Input b2 = new Input(b2_, "b2");
 	
 		// Structure of the neural network
- 		Node l1 = new Linear(X, W1, b1, "l1");
-		Node s1 = new Sigmoid(l1, "s1");
-		Node l2 = new Linear(s1, W2, b2, "l2");
-		Node cost = new MSE(y, l2, "cost");
+ 		Node linear1 = new Linear(X, W1, b1, "l1");
+		Node sigmoid = new Sigmoid(linear1, "s1");
+		Node linear2 = new Linear(sigmoid, W2, b2, "l2");
+		Node cost = new MSE(y, linear2, "cost");
 
 		Node[] inputNodes = new Node[] {X, y, W1, b1, W2, b2};
-		int epochs = 1000;
-		int batchSize = 11;
-		int stepsPerEpoch = numSamples / batchSize;
-		double learningRate = 0.01;
-
 		List<Node> sortedNodes = Graph.topologicalSort(inputNodes);
 		for (Node node: sortedNodes) {
 			System.out.println(node.name);
 		}
 
-		Input[] trainables = new Input[]{W1, b1, W2, b2};
-
 		System.out.println("Total number of examples: " + numSamples);
 
+		int epochs = 1000;
+		int batchSize = 1;
+		int stepsPerEpoch = numSamples / batchSize;
+		double learningRate = 0.01;
+
+		Input[] trainables = new Input[]{W1, b1, W2, b2};
+		Value X_ = new Value(BostonData.instance.DATA).normalizeColumn();
+		Value y_ = new Value(BostonData.instance.TARGET).T();
 		for (int i = 0; i < epochs; i++) { 
 		    double loss = 0.0;
 		    for (int j = 0; j < stepsPerEpoch; j++) {

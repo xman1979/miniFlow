@@ -55,18 +55,26 @@ public class Value {
 	}
 	
 	public Value add(Value V) {
-		double[][] res = new double[row][col];
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				if (i < V.M.length && j < V.M[0].length) {
+		if (row == V.row && col == V.col) {
+			double[][] res = new double[row][col];
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < col; j++) {
 					res[i][j] = M[i][j] + V.M[i][j];
 				}
-				else {
-					res[i][j] = M[i][j];
+			}
+			return new Value(res);
+		}
+		
+		if (V.row == 1 && col == V.col) {
+			double[][] res = new double[row][col];
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < col; j++) {
+					res[i][j] = M[i][j] + V.M[0][j];
 				}
 			}
+			return new Value(res);			
 		}
-		return new Value(res);
+		return null;
 	}
 	
 	public Value sumRow() {
@@ -81,20 +89,40 @@ public class Value {
 	}
 
 	public Value sub(Value V) {
+		if (row == V.row && col == V.col) {
+			double[][] res = new double[row][col];
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < col; j++) {
+					res[i][j] = M[i][j] - V.M[i][j];
+				}
+			}
+			return new Value(res);
+		}		
+		if (V.row == 1 && col == V.col) {
+			double[][] res = new double[row][col];
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < col; j++) {
+					res[i][j] = M[i][j] - V.M[0][j];
+				}
+			}
+			return new Value(res);			
+		}
+		return null;
+	}
+	
+	public Value subFromEachRow(Value V) {
+		if (V.row != 1 || col != V.col) {
+			return null;
+		}
 		double[][] res = new double[row][col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-				if (i < V.M.length && j < V.M[0].length) {
-					res[i][j] = M[i][j] - V.M[i][j];
-				}
-				else {
-					res[i][j] = M[i][j];
-				}
+				res[i][j] = M[i][j] - V.M[0][j];
 			}
 		}
 		return new Value(res);
 	}
-	
+
 	public Value T() {
 		double[][] res = new double[col][row];
 		for (int i = 0; i < row; i++) {
